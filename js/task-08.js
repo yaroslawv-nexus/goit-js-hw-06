@@ -5,20 +5,24 @@ formRef.addEventListener(`submit`, event => {
 
    const objectProp = {};
    
-   objectProp.email = isEmpty(event.currentTarget.elements.email.value);
-   objectProp.password = isEmpty(event.currentTarget.elements.password.value);
+   objectProp.email = event.currentTarget.elements.email.value;
+   objectProp.password = event.currentTarget.elements.password.value;
 
-   function isEmpty(string) {
-         if(string === ""){
-            alert(`Не всі поля заповненені`);
-            return;
-         }
-         return string;
-   }
-   for(const key of Object.keys(objectProp)){
-    console.log(`${key}: ${objectProp[key]};`)
+   function isEmpty(object) {
+      for(const key of Object.keys(objectProp)){
+        if(!objectProp[key]) {
+         return true;
+        }
+      }
+      return false;
    }
 
-   event.currentTarget.reset();
+   if(!isEmpty(objectProp)){
+      console.log(objectProp);
+      event.currentTarget.reset();
+      return;
+   }
+   alert(`Не всі поля заповненені`);
+    
 });
 
